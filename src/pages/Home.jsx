@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal, { Stagger, item } from "../lib/Reveal.jsx";
 import ProductImage from "../components/ProductImage.jsx";
+import { asset } from "../lib/asset.js";
 import ProductCard from "../components/ProductCard.jsx";
 import SizeTool from "../components/SizeTool.jsx";
 import { PRODUCTS, HIDES, byId } from "../data/products.js";
@@ -93,7 +94,7 @@ export default function Home() {
           {CAT_TILES.map(t => (
             <motion.div key={t.cat} variants={item}>
               <Link to={t.to} className="cat-tile">
-                <img src={t.img} alt={`${t.label} — JACTMAK leather goods`} loading="lazy" width="600" height="760" />
+                <img src={asset(t.img)} alt={`${t.label} — JACTMAK leather goods`} loading="lazy" width="600" height="760" />
                 <span className="ct-n">{PRODUCTS.filter(p => p.category === t.cat).length} pieces</span>
                 <b>{t.label}</b><span>{t.sub}</span>
                 <span className="ct-cta">Shop {t.label.toLowerCase()} <Arrow /></span>

@@ -1,5 +1,6 @@
 import JacketFlat from "./JacketFlat.jsx";
 import { HIDES } from "../data/products.js";
+import { asset } from "../lib/asset.js";
 
 /* ─────────────────────────────────────────────────────────
    ONE SWITCH FOR ALL PRODUCT IMAGERY.
@@ -18,7 +19,7 @@ export default function ProductImage({
   return (
     <div className={`flat ${mode === "spec" ? "spec" : showPhoto ? "photo" : "grain"} ${className}`} style={{ "--hd": H.hex }}>
       {showPhoto
-        ? <img src={photo} alt={`${product.name} — ${product.sub} in ${H.n}, JACTMAK`} loading={priority ? "eager" : "lazy"}
+        ? <img src={asset(photo)} alt={`${product.name} — ${product.sub} in ${H.n}, JACTMAK`} loading={priority ? "eager" : "lazy"}
                fetchPriority={priority ? "high" : "auto"} decoding="async" width="800" height="1000" />
         : <JacketFlat product={product} hide={hide} mode={mode} />}
       <span className="reg a" /><span className="reg b" />

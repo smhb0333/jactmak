@@ -35,6 +35,16 @@ know to serve `index.html` for those deep links, a rewrite rule is already inclu
   `BrowserRouter` for `HashRouter` in `src/main.jsx` and set `base: "./"` in
   `vite.config.js`; you'll trade clean URLs for zero-config hosting.
 
+> **Deploying under a subpath** (e.g. a GitHub Pages *project* site at
+> `you.github.io/repo-name/`, not a custom domain)? Set `base: "/repo-name/"` in
+> `vite.config.js`. Vite only rewrites the module `<script>` tag and `%BASE_URL%`
+> placeholders in `index.html` automatically — it does **not** rewrite plain
+> string paths like `"/products/…jpg"` used in JS. Those are wrapped in
+> `src/lib/asset.js` (`asset(path)`, used by `ProductImage.jsx` and the category
+> tiles on `Home.jsx`) precisely so images still resolve under a subpath. If you
+> add any other root-absolute `public/` path as a raw string, run it through
+> `asset()` too, or it'll 404 under a subpath deploy while working fine locally.
+
 ---
 
 ## Product photography
