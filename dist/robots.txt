@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkout
+Disallow: /order-confirmed
+Disallow: /saved
+
+Sitemap: https://www.jactmak.com/sitemap.xml

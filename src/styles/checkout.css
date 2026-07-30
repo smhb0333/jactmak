@@ -1,0 +1,109 @@
+/* ══════════════════════════════════════════════════════════
+   CHECKOUT — built mobile-first.
+   Phone  : one column, collapsible summary at top, sticky pay bar
+   ≥960px : two columns, summary sticks in the right rail
+   ══════════════════════════════════════════════════════════ */
+.co-shell{min-height:100dvh;display:flex;flex-direction:column;background:var(--hide)}
+
+/* Minimal checkout header — no nav, no distractions */
+.co-hdr{border-bottom:var(--line);background:var(--hide-2)}
+.co-hdr-in{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.co-secure{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:var(--t-mi);
+  letter-spacing:.12em;text-transform:uppercase;color:var(--parch-m)}
+
+/* Step indicator */
+.co-steps{display:flex;align-items:center;gap:6px;padding-block:18px;border-bottom:var(--line);overflow-x:auto;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.co-steps::-webkit-scrollbar{display:none}
+.co-step{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:var(--t-mi);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--parch-m);white-space:nowrap;background:none;border:0;
+  padding:6px 0;cursor:default}
+.co-step .dot{width:22px;height:22px;flex:none;border-radius:50%;border:1px solid var(--hide-4);display:grid;
+  place-items:center;font-size:10px;font-weight:700}
+.co-step.done{color:var(--parch);cursor:pointer}
+.co-step.done .dot{background:var(--ok);border-color:var(--ok);color:var(--hide)}
+.co-step.now{color:var(--brass)}
+.co-step.now .dot{border-color:var(--brass);color:var(--brass)}
+.co-step .bar{width:22px;height:1px;background:var(--hide-4);flex:none;margin-inline:2px}
+@media(min-width:600px){.co-step .bar{width:40px}}
+
+/* Body layout */
+.co-body{flex:1;padding-block:clamp(20px,3vw,44px) 140px}
+@media(min-width:960px){
+  .co-body{padding-bottom:clamp(40px,5vw,90px)}
+  .co-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(32px,4vw,72px);align-items:start}
+  .co-aside{position:sticky;top:24px}
+}
+
+/* Collapsible order summary — phone only */
+.co-sum-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:16px 0;
+  background:none;border:0;border-bottom:var(--line);cursor:pointer;text-align:left;min-height:56px}
+@media(min-width:960px){.co-sum-toggle{display:none}}
+.co-sum-toggle .lbl{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:var(--t-xs);
+  letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.co-sum-toggle .cv{transition:transform .35s var(--ease)}
+.co-sum-toggle[aria-expanded="true"] .cv{transform:rotate(180deg)}
+.co-aside-inner{border:var(--line);border-radius:var(--r-m);background:var(--hide-2);padding:clamp(16px,2.4vw,26px)}
+@media(max-width:959px){.co-aside-inner{border:0;border-bottom:var(--line);border-radius:0;padding:18px 0;background:none}}
+
+/* Line items */
+.co-line{display:grid;grid-template-columns:58px 1fr auto;gap:13px;align-items:center;padding:11px 0}
+.co-line + .co-line{border-top:var(--line)}
+.co-line .flat{border-radius:var(--r-s);aspect-ratio:1}
+.co-line .nm{font-family:var(--disp);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+.co-line .mt{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--parch-m);margin-top:4px}
+
+/* Sticky pay bar — phone only */
+.co-bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(20,17,16,.94);
+  backdrop-filter:blur(18px);border-top:var(--line);padding:12px var(--gut) calc(12px + env(safe-area-inset-bottom))}
+@media(min-width:960px){.co-bar{display:none}}
+.co-bar-row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:10px}
+.co-bar .tot{font-family:var(--mono);font-weight:700;font-size:1.16rem;font-variant-numeric:tabular-nums}
+
+/* Payment method cards */
+.pay-opts{display:grid;gap:9px}
+.pay-opt{display:flex;align-items:center;gap:13px;padding:15px;border:1px solid var(--hide-3);border-radius:var(--r-s);
+  background:transparent;cursor:pointer;text-align:left;width:100%;transition:all .28s var(--ease);min-height:58px}
+.pay-opt:hover{border-color:var(--hide-4)}
+.pay-opt[aria-pressed="true"]{border-color:var(--brass);background:rgba(201,166,107,.07)}
+.pay-opt .radio{width:19px;height:19px;flex:none;border-radius:50%;border:1px solid var(--hide-4);display:grid;place-items:center}
+.pay-opt[aria-pressed="true"] .radio{border-color:var(--brass)}
+.pay-opt[aria-pressed="true"] .radio::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--brass)}
+.pay-opt .ttl{font-size:var(--t-sm);font-weight:400}
+.pay-opt .sub{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--parch-m);margin-top:3px}
+
+/* Delivery options */
+.ship-opt{display:flex;align-items:center;justify-content:space-between;gap:13px;padding:15px;border:1px solid var(--hide-3);
+  border-radius:var(--r-s);background:transparent;cursor:pointer;text-align:left;width:100%;transition:all .28s var(--ease);min-height:62px}
+.ship-opt[aria-pressed="true"]{border-color:var(--brass);background:rgba(201,166,107,.07)}
+.ship-opt .p{font-family:var(--mono);font-weight:700;font-size:var(--t-xs);white-space:nowrap}
+
+.co-h{font-family:var(--disp);font-weight:700;font-size:1.3rem;letter-spacing:.03em;text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.co-h .ix{width:24px;height:24px;flex:none;border-radius:50%;background:var(--brass);color:var(--hide);display:grid;
+  place-items:center;font-family:var(--mono);font-size:10px;font-weight:700}
+.co-block + .co-block{margin-top:clamp(28px,3.4vw,44px);padding-top:clamp(28px,3.4vw,44px);border-top:var(--line)}
+.co-trust{display:grid;gap:11px;margin-top:26px}
+.co-trust li{display:flex;gap:10px;align-items:flex-start;font-size:var(--t-xs);color:var(--parch-m)}
+.co-trust svg{flex:none;margin-top:2px;color:var(--ok)}
+
+/* Confirmation */
+.co-done{max-width:620px;margin-inline:auto;text-align:center;padding-block:clamp(40px,7vw,90px)}
+.co-tick{width:66px;height:66px;border-radius:50%;border:1px solid var(--ok);display:grid;place-items:center;
+  margin-inline:auto;margin-bottom:24px;color:var(--ok)}
+
+/* Show the right summary/action per breakpoint */
+.desk-sum{display:none}
+.desk-next{display:none}
+@media(min-width:960px){
+  .desk-sum{display:block}
+  .desk-next{display:inline-flex}
+  .mob-sum{display:none}
+}
+.mob-only{display:grid}
+@media(min-width:1040px){.mob-only{display:none}}
+
+/* Field label sits above the control; error is a sibling, not part of the name */
+.field > label{display:block}
+.field > label > span{font-family:var(--mono);font-size:var(--t-mi);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--parch-m)}
